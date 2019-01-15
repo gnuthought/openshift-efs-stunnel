@@ -221,7 +221,7 @@ def update_efs_stunnel_targets(efs_targets):
             while next_stunnel_port in used_stunnel_ports:
                 next_stunnel_port += 1
             efs_stunnel_target = {
-                "name": file_system['Name'],
+                "name": file_system.get('Name', file_system_id),
                 "stunnel_port": next_stunnel_port
             }
             next_stunnel_port += 1
