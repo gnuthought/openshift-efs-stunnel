@@ -365,7 +365,7 @@ def pvc_reject_reason(pvc):
         return "Unable to find file_system_id {}".format(file_system_id), False
     if not pvc.spec.selector.match_labels.get('volume_name', False):
         return "Missing spec.selector.match_labels.volume_name", True
-    if not re.match(r'^[a-z0-9_]+$', pvc.spec.selector.match_labels['volume_name']):
+    if not re.match(r'^[a-z0-9_\-]+$', pvc.spec.selector.match_labels['volume_name']):
         return "Invalid value for pvc.spec.selector.match_labels.volume_name", True
     if not pvc.spec.selector.match_labels.get('reclaim_policy', 'Delete') in ['Delete','Retain']:
         return "Invalid value for pvc.spec.selector.match_labels.reclaim_policy", True
