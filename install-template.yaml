@@ -16,6 +16,8 @@ parameters:
   value: openshift-efs-stunnel/efs-stunnel
 - name: EFS_STUNNEL_IMAGE_TAG
   value: latest
+- name: EFS_STUNNEL_NODE_SELECTOR
+  value: '{}'
 objects:
 - apiVersion: v1
   kind: ServiceAccount
@@ -166,6 +168,7 @@ objects:
           terminationMessagePolicy: File
         dnsPolicy: ClusterFirst
         hostNetwork: true
+        nodeSelector: "${{EFS_STUNNEL_NODE_SELECTOR}}"
         restartPolicy: Always
         securityContext: {}
         serviceAccount: efs-stunnel

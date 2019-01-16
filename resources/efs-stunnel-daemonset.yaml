@@ -32,6 +32,8 @@ spec:
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       hostNetwork: true
+      nodeSelector:
+        node-role.kubernetes.io/compute: "true"
       restartPolicy: Always
       securityContext: {}
       serviceAccount: efs-stunnel
