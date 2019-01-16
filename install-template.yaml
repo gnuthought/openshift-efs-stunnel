@@ -16,6 +16,10 @@ parameters:
   value: openshift-efs-stunnel/efs-stunnel
 - name: EFS_STUNNEL_IMAGE_TAG
   value: latest
+- name: WORKER_IMAGE
+  value: openshift/rhel7
+- name: WORKER_IMAGE_TAG
+  value: latest
 - name: EFS_STUNNEL_NODE_SELECTOR
   value: '{}'
 objects:
@@ -113,6 +117,9 @@ objects:
       spec:
         containers:
         - name: efs-manager
+          env:
+          - name: WORKER_IMAGE
+            value: "${REGISTRY}/${WORKER_IMAGE}:${WORKER_IMAGE_TAG}"
           image: "${REGISTRY}/${EFS_MANAGER_IMAGE}:${EFS_MANAGER_IMAGE_TAG}"
           imagePullPolicy: Always
           #livenessProbe:

@@ -19,6 +19,9 @@ spec:
     spec:
       containers:
       - name: efs-manager
+        env:
+        - name: WORKER_IMAGE
+          value: docker-registry.default.svc:5000/openshift/rhel7:latest
         image: docker-registry.default.svc:5000/openshift-efs-stunnel/efs-manager:latest
         imagePullPolicy: Always
         #livenessProbe:
