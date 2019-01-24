@@ -24,10 +24,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 50Mi
+            memory: 100Mi
           limits:
             cpu: 200m
-            memory: 50Mi
+            memory: 100Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
