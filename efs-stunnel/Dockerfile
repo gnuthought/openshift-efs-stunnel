@@ -26,7 +26,9 @@ RUN cd /usr/local/src && \
 RUN easy_install pip && \
     pip install --ignore-installed \
       awscli \
-      kubernetes
+      kubernetes && \
+    mkdir -p /etc/amazon/efs && \
+    chmod a+rx /etc/amazon /etc/amazon/efs
 
 COPY efs-utils.crt /etc/amazon/efs/efs-utils.crt
 COPY efs-stunnel.py /usr/local/bin/efs-stunnel.py

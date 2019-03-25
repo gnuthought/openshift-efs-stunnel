@@ -47,7 +47,11 @@ def init_efs_api():
     global efs_api
     r = requests.get("http://169.254.169.254/latest/dynamic/instance-identity/document")
     response_json = r.json()
-    efs_api = boto3.client('efs', region_name=response_json.get('region'))
+    efs_api = boto3.client('efs',
+        region_name=response_json.get('region'),
+        aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID', None),
+        aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY', None)
+    )
 
 def init_kube_api():
     """Set kube_api and kube_storage_api globals to communicate with the local
