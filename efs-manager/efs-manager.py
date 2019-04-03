@@ -175,8 +175,7 @@ def remove_root_pvc(file_system_id):
     """Remove the root persistent volume claim for an EFS file system."""
     delete_namespaced_persistent_volume_claim(
         "efs-stunnel-{}".format(file_system_id),
-        namespace,
-        {}
+        namespace
     )
 
 def manage_stunnel_conf():
@@ -452,8 +451,7 @@ def delete_worker_pod(worker_name):
     """Delete a worker pod by name."""
     kube_api.delete_namespaced_pod(
         worker_name,
-        namespace,
-        {}
+        namespace
     )
 
 def wait_for_worker_completion(worker_name):
@@ -620,7 +618,7 @@ def clean_persistent_volume(pv):
 def delete_persistent_volume(pv):
     """Delete a persistent volume using the kubernetes api."""
     logger.info("Deleting persistent volume {}".format(pv.metadata.name))
-    kube_api.delete_persistent_volume(pv.metadata.name, {})
+    kube_api.delete_persistent_volume(pv.metadata.name)
 
 def manage_persistent_volumes():
     """Watch loop to manage persistent volume cleanup when released."""
