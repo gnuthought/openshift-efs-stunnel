@@ -21,16 +21,19 @@ RUN cd /usr/local/src && \
     make && \
     make install && \
     cd /usr/local/src && \
-    rm -rf stunnel-*/
+    rm -rf stunnel-*/ && \
+    mkdir -p /etc/amazon/efs
+
+ADD https://raw.githubusercontent.com/aws/efs-utils/master/dist/efs-utils.crt \
+    /etc/amazon/efs/efs-utils.crt
 
 RUN easy_install pip && \
     pip install --ignore-installed \
       awscli \
       kubernetes && \
-    mkdir -p /etc/amazon/efs && \
-    chmod a+rx /etc/amazon /etc/amazon/efs
+    chmod a+rx /etc/amazon /etc/amazon/efs && \
+    chmod a+r /etc/amazon/efs/efs-utils.crt
 
-COPY efs-utils.crt /etc/amazon/efs/efs-utils.crt
 COPY efs-stunnel.py /usr/local/bin/efs-stunnel.py
 
 CMD /usr/local/bin/efs-stunnel.py
